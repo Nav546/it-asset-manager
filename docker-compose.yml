@@ -10,8 +10,8 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
-      - db-data:/var/lib/postgresql/data
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db-data:/var/lib/postgresql/data          # persists data across container restarts
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql  # runs once on first startup
     ports:
       - "5432:5432"
     healthcheck:
@@ -68,7 +68,7 @@ services:
     container_name: itam-frontend
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8080:80"           # visit http://localhost:8080
     depends_on:
       backend:
         condition: service_healthy
@@ -76,8 +76,8 @@ services:
       - itam-network
 
 volumes:
-  db-data:
+  db-data:                  # named volume - survives `docker compose down` (not `-v`)
 
 networks:
-  itam-network:
+  itam-network:              # isolated bridge network - only these 4 services can see each other
     driver: bridge
