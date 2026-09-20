@@ -1,7 +1,7 @@
 # Enterprise IT Incident & Asset Management System
 
 A microservice-based web portal for IT Support / System Engineers to track hardware assets,
-log service desk tickets, and monitor system health — built as a 4-container Docker Compose stack.
+log service desk tickets, and monitor system health built as a 4-container Docker Compose stack.
 
 ## Architecture
 
